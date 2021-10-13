@@ -1,6 +1,7 @@
 import ChatIconIllustration from '../assets/icon-chat.png'
 import MoneyIconIllustration from '../assets/icon-money.png'
 import SecurityIconIllustration from '../assets/icon-security.png'
+import '../sass/home.scss'
 
 function Home() {
     return (

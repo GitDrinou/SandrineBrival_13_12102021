@@ -1,6 +1,10 @@
+import {Link} from 'react-router-dom'
 import styled from 'styled-components'
+import { ROUTE_USER } from '../utils/constants'
+import '../sass/login.scss'
+import '../sass/form.scss'
 
-const StyledButton = styled.button`
+const StyledButton = styled(Link)`
     display: block;
     width: 100%;
     padding: 8px;
@@ -15,7 +19,7 @@ const StyledButton = styled.button`
 
 function Login() {
     return (
-        <div className="main bg-dark">
+        <div className="mainLogin bg-dark">
             <div className="sign-in-content">
                 <i className="fa fa-user-circle sign-in-icon"></i>
                 <h1>Sign In</h1>
@@ -32,7 +36,10 @@ function Login() {
                         <input type="checkbox" id="remember-me" />
                         <label for="remember-me">Remember me</label>
                     </div>
-                    <StyledButton to="" className="sign-in-button">Sign In</StyledButton>
+                    {/* PLACEHOLDER DUE TO STATIC SITE */}
+                    <StyledButton to={ROUTE_USER}>Sign In</StyledButton>
+                    {/* SHOULD BE THE BUTTON BELOW
+                    <StyledButton>Sign In</StyledButton> */}
                 </form>
             </div>
         </div>

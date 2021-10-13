@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ROUTE_HOME, ROUTE_LOGIN } from '../../utils/constants'
 import LogoIllustration from '../../assets/argentBankLogo.png'
+import '../../sass/header.scss'
 import styled from 'styled-components'
 
 const StyledLink = styled(Link)`

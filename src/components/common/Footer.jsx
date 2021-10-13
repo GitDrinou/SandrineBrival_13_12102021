@@ -1,3 +1,4 @@
+import '../../sass/footer.scss'
 
 function Footer() {
     return(
