@@ -8,20 +8,23 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import User from './pages/User'
 import Footer from './components/common/Footer'
+//import { Provider } from 'react-redux'
 
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <Header />
-      <Switch>
-        <Route exact path={ROUTE_HOME} component={Home} />
-        <Route path={ROUTE_LOGIN} component={Login} />
-        <Route path={ROUTE_USER} component={User} />
-      </Switch>
-      <Footer />
-    </Router>
+    {/* <Provider> */}
+      <Router>
+        <Header />
+        <Switch>
+          <Route exact path={ROUTE_HOME} component={Home} />
+          <Route path={ROUTE_LOGIN} component={Login} />
+          <Route path={ROUTE_USER} component={User} />
+        </Switch>
+        <Footer />
+      </Router>
+    {/* </Provider> */}
   </React.StrictMode>,
   document.getElementById('root')
 )
