@@ -1,42 +1,32 @@
-import {Link} from 'react-router-dom'
-import styled from 'styled-components'
-import { ROUTE_USER } from '../utils/constants'
 import '../sass/form.scss'
 
+const LoginForm = (props) => {
 
-const StyledButton = styled(Link)`
-    display: block;
-    width: 100%;
-    padding: 8px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    margin-top: 1rem;
-    border-color: #00bc77;
-    background-color: #00bc77;
-    color: #fff;
-    border: none;
-`
+    const handleSubmitSignIn = (event) => {
+        event.preventDefault()
+        let login = {
+            'email': event.target.username.value,
+            'password': event.target.password.value
+        }
+        props.checkLogin(login)
+    }
 
-const LoginForm = () => {
     return (
         <div>
-            <form>
+            <form  onSubmit={handleSubmitSignIn}>
                     <div className="input-wrapper">
-                        <label for="username">Username</label>
-                        <input type="text" id="username" />
+                        <label htmlFor="username">Username</label>
+                        <input type="text" id="username" required />
                     </div>
                     <div className="input-wrapper">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" />
+                        <label htmlFor="password">Password</label>
+                        <input type="password" id="password" required />
                     </div>
                     <div className="input-remember">
                         <input type="checkbox" id="remember-me" />
-                        <label for="remember-me">Remember me</label>
+                        <label htmlFor="remember-me">Remember me</label>
                     </div>
-                    {/* PLACEHOLDER DUE TO STATIC SITE */}
-                    <StyledButton to={ROUTE_USER}>Sign In</StyledButton>
-                    {/* SHOULD BE THE BUTTON BELOW
-                    <StyledButton>Sign In</StyledButton> */}
+                    <button type="submit" className="btn-signIn">Sign In</button>
                 </form>
         </div>
     )

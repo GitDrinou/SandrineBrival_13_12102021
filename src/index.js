@@ -8,13 +8,14 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import User from './pages/User'
 import Footer from './components/common/Footer'
-//import { Provider } from 'react-redux'
+import { Provider } from 'react-redux'
+import { store } from './utils/store'
 
 
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <Provider> */}
+    <Provider store = {store}>
       <Router>
         <Header />
         <Switch>
@@ -24,7 +25,7 @@ ReactDOM.render(
         </Switch>
         <Footer />
       </Router>
-    {/* </Provider> */}
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 )

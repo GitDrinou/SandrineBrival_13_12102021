@@ -2,6 +2,9 @@ export const ROUTE_HOME = '/'
 export const ROUTE_LOGIN = '/login'
 export const ROUTE_USER = '/user'
 
+export const LOGIN_ACT = 'user/login'
+export const LOGIN_API = 'http://localhost:3001/api/v1/user/login'
+
 export const homeFeatures = [
         {
             id: 1,
