@@ -4,6 +4,7 @@ export const ROUTE_USER = '/user'
 
 export const LOGIN_ACT = 'user/login'
 export const LOGIN_API = 'http://localhost:3001/api/v1/user/login'
+export const USER_API = 'http://localhost:3001/api/v1/user/profile'
 
 export const homeFeatures = [
         {

@@ -15,6 +15,10 @@
     }
 }
 
+input::placeholder {
+  font-size: 0.7rem;
+}
+
 .input-remember {
   display: flex;
 
@@ -40,4 +44,16 @@
     background-color: #222;
     color: #FFFF;
   }
+}
+
+.error-message {
+  display: block;
+  width: 100%;
+  padding: 5px;
+  font-size: 0.5rm;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #FFFF;
+  background-color: #dc3545;
+  border: none;
 }
