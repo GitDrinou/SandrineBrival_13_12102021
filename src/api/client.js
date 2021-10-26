@@ -30,7 +30,7 @@ export async function clientPost(endpoint, body) {
 export async function clientPostAuthentication(endpoint, secureKey) {
     
     let data
-    console.log(secureKey)
+    
     try {
         const response = await fetch(endpoint, {
             method: 'POST',

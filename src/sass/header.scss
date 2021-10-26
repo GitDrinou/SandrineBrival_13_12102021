@@ -22,6 +22,8 @@
 .main-nav-item {
   text-decoration: none;
   margin-right: 0.5rem;
+  font-weight: bold;
+  color: #2c3e50;
 }
 
 .main-nav-item:hover {
@@ -33,7 +35,12 @@
   align-items: center;
 }
 
-.header-sign {
+.header-signIn {
     padding-right: 10px;
+}
+
+.header-signOut {
+  padding-right: 10px;
+  padding-left: 15px;
 }
   
