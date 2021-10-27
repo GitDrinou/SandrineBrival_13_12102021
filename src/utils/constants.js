@@ -3,6 +3,10 @@ export const ROUTE_PROFILE = '/profile'
 export const ROUTE_LOGIN = '/login'
 export const ROUTE_USER = '/user/:userId'
 
+export const TITLE_PAGE_HOME = 'Argent Bank - Home'
+export const TITLE_PAGE_SIGNIN = 'Argent Bank - Sign In'
+export const TITLE_PAGE_PROFILE = 'Argent Bank - Profile'
+
 
 export const LOGIN_ACT = 'user/login'
 export const LOGIN_API = 'http://localhost:3001/api/v1/user/login'

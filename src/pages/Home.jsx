@@ -1,9 +1,16 @@
 import '../sass/home.scss'
+import { useEffect } from 'react'
+import { TITLE_PAGE_HOME } from '../utils/constants'
 import Header from '../components/common/Header'
 import { homeFeatures } from '../utils/constants'
 import HomeCard from '../components/HomeCard'
 
+
 function Home() {
+
+    useEffect(() => {
+        document.title = TITLE_PAGE_HOME
+    }, [])
 
     return (
         <div>

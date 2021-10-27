@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+import { TITLE_PAGE_SIGNIN } from '../utils/constants'
 import Header from '../components/common/Header'
 import '../sass/login.scss'
 import LoginForm from '../components/LoginForm'
@@ -5,6 +7,10 @@ import LoginForm from '../components/LoginForm'
 
 const Login = () => {
     
+    useEffect(() => {
+        document.title = TITLE_PAGE_SIGNIN
+    }, [])
+
     return (
         <div>
             <Header />

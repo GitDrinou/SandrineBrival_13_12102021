@@ -5,14 +5,17 @@ import '../../sass/header.scss'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux'
 import { logOut } from '../../features/loginSlice'
+import { useSelector } from 'react-redux'
 
 const StyledLink = styled(Link)`
     font-weight: bold;
     color: #2c3e50;
 `
-function Header({ userName }) {
+function Header() {
 
     const dispatch = useDispatch()
+    
+    const userName = useSelector(state => state.login.userInfos.firstName)
 
     const handleSignOut = () => {
         dispatch(logOut())

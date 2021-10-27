@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux"
+//import AccountCard from "./AccountCard"
 import Header from "./common/Header"
 
 const Dashboard = () => {
@@ -7,13 +8,14 @@ const Dashboard = () => {
 
     return (
         <div>
-            <Header  userName={userName} />
+            <Header />
             <div className="mainUser bg-dark">
             <div className="header">
                 <h1>Welcome back<br />{userName} !</h1>
                 <button className="edit-button">Edit Name</button>
             </div>
             <h2 className="sr-only">Accounts</h2>
+            {/* <AccountCard /> */}
             <div className="account">
                 <div className="account-content-wrapper">
                     <h3 className="account-title">Argent Bank Checking (x8349)</h3>

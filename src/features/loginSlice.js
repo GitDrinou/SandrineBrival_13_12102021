@@ -7,8 +7,6 @@ const initialState = {
     userInfos:[],
     status: 'idle',
     error: null,
-    isLogsSaved: false,
-    logInfos:[],
     userStatus: 'idle',
     token: null,
 }
@@ -33,20 +31,12 @@ const loginSlice  = createSlice ({
     name: 'login',
     initialState,
     reducers: {
-        logRemember(state, action) {
-            console.log(action.payload)
-            state.isLogsSaved = action.payload.rememberCheck
-            state.logInfos = {
-                email: action.payload.email,
-                password: action.payload.password
-            }
-        },
         logOut(state,action) {
             state.userInfos = []
             state.status = 'idle'
             state.userStatus = 'idle'
             state.token = null
-            if (state.isLogsSaved === false) state.logInfos = []
+            sessionStorage.removeItem("sKAB")
         }
     },
     extraReducers(builder){
@@ -58,6 +48,7 @@ const loginSlice  = createSlice ({
                 state.status= 'succeeded'
                 if(state.error !== null) state.error = null
                 state.token = 'Bearer'.concat(action.payload.body.token)
+                sessionStorage.setItem("sKAB",JSON.stringify('Bearer'.concat(action.payload.body.token)))
             })
             .addCase(fetchLoginUser.rejected, (state,action) => {
                 state.status = 'failed'
@@ -76,7 +67,7 @@ const loginSlice  = createSlice ({
     }
 })
 
-export const { logRemember, logOut } = loginSlice.actions
+export const { logOut } = loginSlice.actions
 
 export default loginSlice.reducer
 
