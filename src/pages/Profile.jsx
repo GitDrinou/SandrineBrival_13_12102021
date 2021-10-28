@@ -16,7 +16,6 @@ const Profile = () => {
         if (sessionStorage.getItem("sKAB") !== null) dispatch(fetchUser(JSON.parse(sessionStorage.getItem("sKAB"))))
     }, [dispatch])
     
-
     if ((loginStatus === 'succeeded') || (userStatus === 'succeeded')) {        
         return <User />
     }

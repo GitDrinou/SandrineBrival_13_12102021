@@ -52,7 +52,7 @@ const loginSlice  = createSlice ({
             })
             .addCase(fetchLoginUser.rejected, (state,action) => {
                 state.status = 'failed'
-                state.error = action.error.message
+                action.error.message === "Rejected" ? state.error = "Error : connection server" : state.error = action.error.message
             })
             .addCase(fetchUser.fulfilled, (state, action) => {
                 state.userStatus= 'succeeded'

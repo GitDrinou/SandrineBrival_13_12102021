@@ -1,5 +1,4 @@
 
-
 export async function clientPost(endpoint, body) {
     
     let data
@@ -30,6 +29,8 @@ export async function clientPost(endpoint, body) {
 export async function clientPostAuthentication(endpoint, secureKey) {
     
     let data
+
+    if (secureKey === null ) secureKey = JSON.parse(sessionStorage.getItem("sKAB"))
     
     try {
         const response = await fetch(endpoint, {
