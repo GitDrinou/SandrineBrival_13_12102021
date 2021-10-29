@@ -53,7 +53,7 @@ const LoginForm = () => {
     useEffect(() => {
         if (loginStatus === 'succeeded') {
             dispatch(fetchUser(secureKey))          
-        }     
+        } 
         if (localStorage.getItem("logsAB") !=null) {  
             let userLogs = JSON.parse(localStorage.getItem("logsAB"))       
             setEmail(userLogs.email)

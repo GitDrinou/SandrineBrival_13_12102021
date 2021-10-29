@@ -8,15 +8,13 @@ import User from './User'
 const Profile = () => {
     
     const dispatch = useDispatch()
-
-    const loginStatus = useSelector(state => state.login.status)
     const userStatus = useSelector(state => state.login.userStatus)
 
     useEffect(() => {
         if (sessionStorage.getItem("sKAB") !== null) dispatch(fetchUser(JSON.parse(sessionStorage.getItem("sKAB"))))
     }, [dispatch])
     
-    if ((loginStatus === 'succeeded') || (userStatus === 'succeeded')) {        
+    if (userStatus === 'succeeded') {        
         return <User />
     }
     else {

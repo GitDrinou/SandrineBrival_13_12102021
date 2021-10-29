@@ -12,7 +12,7 @@ const initialState = {
 }
 
 export const fetchLoginUser = createAsyncThunk(
-    'user/checkUser',
+    'login/checkUser',
     async (userDatas) => {
         const response = await clientPost(LOGIN_API, userDatas)
         return response.data
@@ -20,7 +20,7 @@ export const fetchLoginUser = createAsyncThunk(
 )
 
 export const fetchUser = createAsyncThunk(
-    'user/fetchUser',
+    'login/fetchUser',
     async(userToken) => {
         const response = await clientPostAuthentication(USER_API, userToken)
         return response.data
@@ -37,6 +37,7 @@ const loginSlice  = createSlice ({
             state.userStatus = 'idle'
             state.token = null
             sessionStorage.removeItem("sKAB")
+            sessionStorage.removeItem("isEdited")
         }
     },
     extraReducers(builder){
@@ -63,6 +64,7 @@ const loginSlice  = createSlice ({
                     lastName: action.payload.body.lastName,
                     id: action.payload.body.id
                 }
+                state.token = JSON.parse(sessionStorage.getItem("sKAB"))
             })  
     }
 })

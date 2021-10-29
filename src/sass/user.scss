@@ -55,12 +55,24 @@
     margin-bottom: 2rem;
 }
 
-.header-editForm {
+.header-edit{
     color: #28313C;
     margin-bottom: 2rem;
 }
 
-.transaction-button {
+.transaction-button-blue {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    border-color: #6458F5;
+    background-color: #6458F5;
+    color: #fff;
+}
+
+.transaction-button-green {
     display: block;
     width: 100%;
     padding: 8px;
@@ -76,11 +88,6 @@
     background-color: #DDE2EA;
 }
 
-.frmEditUser > input {
-    padding: 5px;
-    font-size: 1.2rem;
-}
-  
   
 @media (min-width: 720px) {
     .account {
@@ -91,7 +98,7 @@
         flex: 0;
     }
 
-    .transaction-button {
+    .transaction-button-green, .transaction-button-blue {
         width: 200px;
     }
 }

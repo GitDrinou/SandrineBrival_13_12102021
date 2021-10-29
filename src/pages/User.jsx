@@ -21,9 +21,13 @@ function User() {
     const userStatus = useSelector(state => state.login.userStatus)
     
     let content
+    const firstName = useSelector(state => state.login.userInfos.firstName)
+    const lastName = useSelector(state => state.login.userInfos.lastName)
+    const idUser = useSelector(state => state.login.userInfos.id)
 
     if (userStatus === 'succeeded') {
-        content = <Dashboard />
+
+        content = <Dashboard firstName={firstName} lastName={lastName} idUser={idUser} />
     }
 
     return (
