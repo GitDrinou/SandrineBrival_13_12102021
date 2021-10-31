@@ -40,14 +40,14 @@ function Header() {
                         </Link>
                     ) :
                     (
-                        <div>
+                        <div className="main-nav-item-group">
                             <Link to={ROUTE_PROFILE} className="main-nav-item">
                                 <i className="fa fa-user-circle header-signIn"></i>
-                                {userName}
+                                <span className="main-nav-item-text">{userName}</span>
                             </Link>
                             <Link to={ROUTE_HOME} className="main-nav-item" onClick={handleSignOut}>
                                 <i className="fa fa-sign-out header-signOut"></i>
-                                Sign out
+                                <span className="main-nav-item-text">Sign out</span>
                             </Link>
                         </div>
                     )

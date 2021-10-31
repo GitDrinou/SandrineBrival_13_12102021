@@ -19,11 +19,16 @@
   color: #42b983;
 }
 
+
 .main-nav-item {
   text-decoration: none;
   margin-right: 0.5rem;
   font-weight: bold;
   color: #2c3e50;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .main-nav-item:hover {
@@ -37,10 +42,35 @@
 
 .header-signIn {
     padding-right: 10px;
+    font-size: 1.5rem;
+    color: #9EADBA;
 }
 
 .header-signOut {
   padding-right: 10px;
   padding-left: 15px;
+  font-size: 1.5rem;
 }
+
+.main-nav-item-group {
+  display: flex;
+  flex-direction: row;
+}
+
+@media (min-width:720px) {
+  .main-nav-item-group {
+    display: flex;
+  }
+}
+
+@media (max-width:428px) {
+
+  .main-nav-item:first-child {
+    font-size: 1.3rem;
+  }
+
+  .main-nav-item-text {
+    display: none;
+  }  
   
+}

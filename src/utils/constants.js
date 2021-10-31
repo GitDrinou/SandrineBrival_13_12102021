@@ -1,7 +1,7 @@
 export const ROUTE_HOME = '/'
 export const ROUTE_PROFILE = '/profile/'
 export const ROUTE_LOGIN = '/login'
-export const ROUTE_USER = '/user/:userId'
+export const ROUTE_TRANSACTION = '/transaction/:idTransaction'
 
 export const TITLE_PAGE_HOME = 'Argent Bank - Home'
 export const TITLE_PAGE_SIGNIN = 'Argent Bank - Sign In'

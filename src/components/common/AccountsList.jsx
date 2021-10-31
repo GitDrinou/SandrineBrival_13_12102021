@@ -14,6 +14,7 @@ const AccountsList = (props) => {
                         amount = {card.amount}
                         currency = {card.currency}
                         status = {card.status}
+                        idTransaction = {card.id}
                     />
                 ))
             }

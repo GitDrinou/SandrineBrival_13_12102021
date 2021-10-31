@@ -1,5 +1,6 @@
 import { capitalizeString } from "../utils/functions"
 import { useSelector } from "react-redux"
+import { Link } from "react-router-dom"
 
 const AccountCard = (props) => {
 
@@ -10,7 +11,14 @@ const AccountCard = (props) => {
 
     const isEditMode = useSelector(state => state.account.isEditMode)
 
-    isEditMode ? btnTransactionStyle = "transaction-button-blue" : btnTransactionStyle = "transaction-button-green"
+    switch(isEditMode) {
+        case "true":
+            btnTransactionStyle = "transaction-button-blue"
+            break
+        default:
+            btnTransactionStyle = "transaction-button-green"
+            break
+    }
 
     return (
         <div>
@@ -21,7 +29,7 @@ const AccountCard = (props) => {
                     <p className="account-amount-description">{capitalizeString(props.status)} Balance</p>
                 </div>
                 <div className="account-content-wrapper cta">
-                    <button className={btnTransactionStyle}>View transactions</button>
+                    <Link to={`/transaction/${props.idTransaction}`} className={btnTransactionStyle}>View transactions</Link>
                 </div>
             </div>
         </div>

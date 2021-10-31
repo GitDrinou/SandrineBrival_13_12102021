@@ -20,8 +20,6 @@ const Dashboard = (props) => {
 
     let content, wrapperStyle
 
-    console.log("Dash : ", isEditMode)
-
     switch(isEditMode) {
         case "true":
             content = <AccountsHeaderEdit firstName={props.firstName} lastName={props.lastName} idUser={props.idUser} />
