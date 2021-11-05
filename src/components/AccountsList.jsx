@@ -1,4 +1,4 @@
-import AccountCard from "../AccountCard";
+import AccountCard from "./AccountCard";
 
 const AccountsList = (props) => {
 
@@ -10,11 +10,11 @@ const AccountsList = (props) => {
                     <AccountCard 
                         key ={`${index}-${card.accountId}`}
                         type = {card.type}
+                        accountNumber = {card.accountNumber}
                         accountId = {card.accountId}
                         amount = {card.amount}
                         currency = {card.currency}
                         status = {card.status}
-                        idTransaction = {card.id}
                     />
                 ))
             }

@@ -1,0 +1,56 @@
+[
+    {
+        "accountId": "01",
+        "userId": "61547c495e7af3e2b1d25aeb",
+        "type": "Checking",
+        "accountNumber": "x8349",
+        "amount": "4672.53",
+        "currency":"USD",
+        "status":"available"
+      },
+      {
+        "accountId": "02",
+        "userId":"61547c495e7af3e2b1d25aeb",
+        "type":"Saving",
+        "accountNumber":"x6712",
+        "amount":"35743.09",
+        "currency":"USD",
+        "status":"available"
+      },
+      {
+        "accountId": "03",
+        "userId": "61547c495e7af3e2b1d25aeb",
+        "type": "Credit Card",
+        "accountNumber": "x8349",
+        "amount": "552.65",
+        "currency": "USD",
+        "status": "current"
+      },
+      {
+        "accountId": "01",
+        "userId": "61547c495e7af3e2b1d25aed",
+        "type": "Checking",
+        "accountNumber": "x9438",
+        "amount": "2082.79",
+        "currency": "USD",
+        "status": "available"
+      },
+      {
+        "accountId": "02",
+        "userId": "61547c495e7af3e2b1d25aed",
+        "type": "Saving",
+        "accountNumber": "x2176",
+        "amount": "10928.42",
+        "currency": "USD",
+        "status": "available"
+      },
+      {
+        "accountId": "03",
+        "userId": "61547c495e7af3e2b1d25aed",
+        "type": "Credit Card",
+        "accountNumber": "x9438",
+        "amount": "184.30",
+        "currency": "USD",
+        "status": "current",
+      }
+]

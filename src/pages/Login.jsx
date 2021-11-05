@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
-import { TITLE_PAGE_SIGNIN } from '../utils/constants'
-import Header from '../components/common/Header'
+import { TITLE_PAGE_SIGNIN,} from '../utils/constants'
 import '../sass/login.scss'
 import LoginForm from '../components/LoginForm'
 
@@ -10,10 +9,10 @@ const Login = () => {
     useEffect(() => {
         document.title = TITLE_PAGE_SIGNIN
     }, [])
+    
 
     return (
         <div>
-            <Header />
             <div className="mainLogin bg-dark">
                 <div className="sign-in-content">
                     <i className="fa fa-user-circle sign-in-icon"></i>

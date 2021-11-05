@@ -1,15 +1,24 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-import { clientPutAuthentication } from "../api/client"
-import { USER_API } from "../utils/constants"
+import { clientPutAuthentication, clientGetAuthentication } from "../api/client"
+import { USER_API, ACCOUNT_API } from "../utils/constants"
 
 const initialState = {
     status: 'idle',
     isEditMode: false,
     firstName:null,
     lastName:null,
+    accounts:[],
     error: null
 }
 
+
+export const fetchAccounts = createAsyncThunk(
+    'account/fetchAccounts',
+    async(userToken) => {
+        const response = await clientGetAuthentication(ACCOUNT_API, userToken)
+        return response.data
+    }
+)
 
 export const userDatasUpdated = createAsyncThunk(
     'accounts/userDatasUpdated',
@@ -17,7 +26,7 @@ export const userDatasUpdated = createAsyncThunk(
         const firstName = userDatas.firstName
         const lastName = userDatas.lastName
         const body = {"firstName": firstName, "lastName": lastName }
-        const token = userDatas.secureKey
+        const token = userDatas.keyPass
         const response = await clientPutAuthentication(USER_API, body, token)
         return response.data
     }
@@ -32,10 +41,21 @@ const accountSlice  = createSlice ({
         },
         userDataCancelled(state, action) {
             state.isEditMode = "false"
-        }
+        },
     },
     extraReducers(builder){
         builder
+            .addCase(fetchAccounts.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(fetchAccounts.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                state.accounts = state.accounts.concat(action.payload.body)
+            })
+            .addCase(fetchAccounts.rejected, (state, action) => {
+                state.status = 'failed'
+                state.error = action.error.message
+            })
             .addCase(userDatasUpdated.pending, (state, action) => {
                 state.status = 'loading'
             })
@@ -50,6 +70,7 @@ const accountSlice  = createSlice ({
                 state.status = 'failed'
                 action.error.message === "Rejected" ? state.error = "Error : connection server" : state.error = action.error.message
             })
+
     }
 })
 

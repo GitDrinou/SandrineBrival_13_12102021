@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchLoginUser, fetchUser } from '../features/loginSlice'
-
+import { useHistory } from 'react-router'
+import { fetchLoginUser } from '../features/loginSlice'
 import '../sass/form.scss'
+import { ROUTE_PROFILE } from '../utils/constants'
 
 const LoginForm = () => {
 
     let errorMsg
-
+    const history = useHistory()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [rememberCheck, setRememberCheck] = useState(false)
@@ -44,23 +45,22 @@ const LoginForm = () => {
             if(!rememberCheck) {
                 setEmail('')
                 setPassword('')
-            }             
+            }         
         }                   
     }
   
-    const secureKey = useSelector(state => state.login.token)
-
     useEffect(() => {
-        if (loginStatus === 'succeeded') {
-            dispatch(fetchUser(secureKey))          
-        } 
+        
         if (localStorage.getItem("logsAB") !=null) {  
             let userLogs = JSON.parse(localStorage.getItem("logsAB"))       
             setEmail(userLogs.email)
             setPassword(userLogs.password)
             setRememberCheck(userLogs.valCheck)
         }
-    }, [loginStatus, dispatch, secureKey,email])
+        if (loginStatus === "succeeded") {
+            history.push(`${ROUTE_PROFILE}`)
+        }
+    }, [loginStatus,history])
     
     if (loginStatus === 'failed') {
         errorMsg = <span className="error-message"> {loginError} </span>

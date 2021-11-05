@@ -1,17 +1,25 @@
 export const ROUTE_HOME = '/'
-export const ROUTE_PROFILE = '/profile/'
+export const ROUTE_PROFILE = '/profile'
 export const ROUTE_LOGIN = '/login'
-export const ROUTE_TRANSACTION = '/transaction/:idTransaction'
+export const ROUTE_TRANSACTION = '/transaction/:accountId'
 
 export const TITLE_PAGE_HOME = 'Argent Bank - Home'
 export const TITLE_PAGE_SIGNIN = 'Argent Bank - Sign In'
 export const TITLE_PAGE_PROFILE = 'Argent Bank - Profile'
+export const TITLE_PAGE_TRANSACTION = 'Argent Bank - Transactions'
 
 
 export const LOGIN_ACT = 'user/login'
 export const LOGIN_API = 'http://localhost:3001/api/v1/user/login'
 export const USER_API = 'http://localhost:3001/api/v1/user/profile'
+export const ACCOUNT_API = 'http://localhost:3001/api/v1/user/account'
+export const TRANSACTION_API = 'http://localhost:3001/api/v1/user/transaction'
 
+export const secureKey = "tokenArgentBank"
+
+/** @constant { array } homeFeatures
+ * List of home features (Chat, Money, Security,...). Use it if you want to add a new features.
+*/ 
 export const homeFeatures = [
         {
             id: 1,
@@ -31,61 +39,4 @@ export const homeFeatures = [
             title: 'Security you can trust',
             text: 'We use top of the line encryption to make sure your data and money is always safe.'
         } 
-]
-
-export const fakeAccounts = [
-    {   
-        id: 1,
-        userId: "61547c495e7af3e2b1d25aeb",
-        type: "Checking",
-        accountId: "x8349",
-        amount: "4672.53",
-        currency: "USD",
-        status: "available"
-    },
-    {
-        id: 2,
-        userId: "61547c495e7af3e2b1d25aeb",
-        type: "Saving",
-        accountId: "x6712",
-        amount: "35743.09",
-        currency: "USD",
-        status: "available"
-    },
-    {
-        id: 3,
-        userId: "61547c495e7af3e2b1d25aeb",
-        type: "Credit Card",
-        accountId: "x8349",
-        amount: "552.65",
-        currency: "USD",
-        status : "current"
-    },
-    {   
-        id: 4,
-        userId: "61547c495e7af3e2b1d25aed",
-        type: "Checking",
-        accountId: "x9438",
-        amount: "2082.79",
-        currency: "USD",
-        status: "available"
-    },
-    {
-        id: 5,
-        userId: "61547c495e7af3e2b1d25aed",
-        type: "Saving",
-        accountId: "x2176",
-        amount: "10928.42",
-        currency: "USD",
-        status: "available"
-    },
-    {
-        id: 6,
-        userId: "61547c495e7af3e2b1d25aed",
-        type: "Credit Card",
-        accountId: "x9438",
-        amount: "184.30",
-        currency: "USD",
-        status: "current"
-    },
 ]

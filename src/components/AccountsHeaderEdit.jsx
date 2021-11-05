@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { userDataCancelled, userDatasUpdated} from '../features/accountSlice'
 import { useSelector } from 'react-redux'
 import { fetchUser } from '../features/loginSlice'
+import { secureKey } from '../utils/constants'
 
 
 const AccountsHeaderEdit = (props) => {
@@ -19,13 +20,17 @@ const AccountsHeaderEdit = (props) => {
 
     const dispatch = useDispatch()
 
-    const secureKey = useSelector(state => state.login.token)
+    const loginKey = useSelector(state => state.login.token)
+    const sessionKey = sessionStorage.getItem(secureKey)
+
+    const keyPass = loginKey ? loginKey : sessionKey
+
 
     const handleClickSave = () => {
         sessionStorage.removeItem('isEdited')
         if(canSave) {
-            dispatch(userDatasUpdated({ firstName, lastName, secureKey }))
-            if (sessionStorage.getItem("sKAB") !== null) dispatch(fetchUser(JSON.parse(sessionStorage.getItem("sKAB"))))
+            dispatch(userDatasUpdated({ firstName, lastName, keyPass }))
+            dispatch(fetchUser(keyPass))
         }        
     }
 

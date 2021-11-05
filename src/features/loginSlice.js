@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { LOGIN_API, USER_API } from "../utils/constants"
+import { LOGIN_API, secureKey, USER_API } from "../utils/constants"
 import { clientPost, clientPostAuthentication } from "../api/client"
 
 
@@ -36,7 +36,7 @@ const loginSlice  = createSlice ({
             state.status = 'idle'
             state.userStatus = 'idle'
             state.token = null
-            sessionStorage.removeItem("sKAB")
+            sessionStorage.removeItem(secureKey)
             sessionStorage.removeItem("isEdited")
         }
     },
@@ -49,11 +49,11 @@ const loginSlice  = createSlice ({
                 state.status= 'succeeded'
                 if(state.error !== null) state.error = null
                 state.token = 'Bearer'.concat(action.payload.body.token)
-                sessionStorage.setItem("sKAB",JSON.stringify('Bearer'.concat(action.payload.body.token)))
             })
             .addCase(fetchLoginUser.rejected, (state,action) => {
                 state.status = 'failed'
                 action.error.message === "Rejected" ? state.error = "Error : connection server" : state.error = action.error.message
+                sessionStorage.removeItem(secureKey)
             })
             .addCase(fetchUser.fulfilled, (state, action) => {
                 state.userStatus= 'succeeded'
@@ -64,7 +64,6 @@ const loginSlice  = createSlice ({
                     lastName: action.payload.body.lastName,
                     id: action.payload.body.id
                 }
-                state.token = JSON.parse(sessionStorage.getItem("sKAB"))
             })  
     }
 })

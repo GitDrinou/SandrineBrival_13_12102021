@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ROUTE_HOME, ROUTE_PROFILE } from '../../utils/constants'
+import { ROUTE_HOME, ROUTE_LOGIN, ROUTE_PROFILE } from '../../utils/constants'
 import LogoIllustration from '../../assets/argentBankLogo.png'
 import '../../sass/header.scss'
 import styled from 'styled-components'
@@ -20,7 +20,7 @@ function Header() {
     const handleSignOut = () => {
         dispatch(logOut())
     }
-    
+        
     return ( 
         <div className="main-nav">
             <StyledLink to={ROUTE_HOME} className="main-nav-logo">
@@ -34,9 +34,9 @@ function Header() {
             <div>
                 { 
                     userName === undefined ? (
-                        <Link to={ROUTE_PROFILE} className="main-nav-item">
+                        <Link to={ROUTE_LOGIN} className="main-nav-item">
                             <i className="fa fa-user-circle header-signIn"></i>
-                            Sign In
+                            <span className="main-nav-item-text-signIn">Sign In</span>
                         </Link>
                     ) :
                     (

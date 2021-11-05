@@ -54,7 +54,6 @@ export async function clientPostAuthentication(endpoint, secureKey) {
 }
 
 export async function clientPutAuthentication(endpoint, body, secureKey) {
-    
     let data
     
     try {
@@ -65,6 +64,34 @@ export async function clientPutAuthentication(endpoint, body, secureKey) {
                 'Authorization': secureKey
             },
             body:  JSON.stringify(body)
+        })
+        data = await response.json()
+        if (response.ok) {
+            return {
+                status: response.status,
+                data,
+                headers: response.headers,
+                url: response.url,
+            }
+        }
+        throw new Error(response.statusText)
+    } catch (err) {
+        return Promise.reject(data)
+    }
+}
+
+
+export async function clientGetAuthentication(endpoint, secureKey) {
+   
+    let data
+
+    try {
+        const response = await fetch(endpoint, {
+            method: 'GET',
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': secureKey
+            }
         })
         data = await response.json()
         if (response.ok) {

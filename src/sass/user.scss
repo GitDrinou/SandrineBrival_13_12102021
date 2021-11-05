@@ -18,6 +18,22 @@
     text-align: left;
     margin-bottom: 2rem;
 }
+
+.account-view {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #C0CCD7;
+    background-color: #fff;
+    width: 100%;
+    margin: 0 auto;
+    flex-direction: column;
+    padding: 1.5rem;
+    box-sizing: border-box;
+    text-align: center;
+    //margin-bottom: 5rem;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+}
   
 .account-amount {
     margin: 0;
@@ -94,6 +110,28 @@
     background-color: #DDE2EA;
 }
 
+.transaction-list {
+    height: 65vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 0 auto;
+    align-items: center;
+    width: 30%;
+}
+
+.img-worker {
+    height: 200px;
+}
+
+.temporary-text {
+    background-color:  #6458F5;
+    border-radius: 10px;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 1.7rem;
+
+}
   
 @media (min-width: 720px) {
     .account {

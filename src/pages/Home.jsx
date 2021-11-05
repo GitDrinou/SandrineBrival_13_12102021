@@ -1,7 +1,6 @@
 import '../sass/home.scss'
 import { useEffect } from 'react'
 import { TITLE_PAGE_HOME } from '../utils/constants'
-import Header from '../components/common/Header'
 import { homeFeatures } from '../utils/constants'
 import HomeCard from '../components/HomeCard'
 
@@ -14,7 +13,6 @@ function Home() {
 
     return (
         <div>
-            <Header />
             <div className="hero">
                 <div className="hero-content">
                     <h2 className="sr-only">Promoted Content</h2>

@@ -1,16 +1,26 @@
-import AccountsList from "../components/common/AccountsList"
-import Header from "./common/Header"
-import { fakeAccounts } from '../utils/constants'
+import { secureKey } from "../utils/constants"
+import AccountsList from "./AccountsList"
 import { useDispatch, useSelector } from "react-redux"
-import { userDataEdited } from "../features/accountSlice"
+import { fetchAccounts, userDataEdited } from "../features/accountSlice"
 import AccountsHeader from "./AccountsHeader"
 import AccountsHeaderEdit from "./AccountsHeaderEdit"
+import { useEffect } from "react"
 
-const Dashboard = (props) => {
+const Accounts = (props) => {
 
     const dispatch = useDispatch()
 
-    const userAccounts = fakeAccounts && fakeAccounts.filter(account => account.userId === props.idUser)
+    const loginKey = useSelector(state => state.login.token)
+    const sessionKey = sessionStorage.getItem(secureKey)
+
+    const keyPass = loginKey ? loginKey : sessionKey
+
+    useEffect(() =>{
+        dispatch(fetchAccounts(keyPass)) 
+    }, [dispatch, keyPass])
+
+    const userAccounts = useSelector(state => state.account.accounts)
+      
  
     const handleEditUserData = () => {
         dispatch(userDataEdited())
@@ -33,14 +43,13 @@ const Dashboard = (props) => {
      
     return (
         <div>
-            <Header />
             <div className={wrapperStyle}>
                 {content}       
-                <AccountsList accounts={userAccounts} />                
+                <AccountsList accounts={userAccounts} />
             </div>
         </div>
         
     )
 }
 
-export default Dashboard
+export default Accounts

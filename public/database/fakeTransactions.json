@@ -1,0 +1,80 @@
+[
+    {   
+        "transactionId": "1",
+        "accountId": "1",
+        "userId":"618504cee6d8a3fc8239204c",
+        "description": "Brenda Bakery",
+        "amount": "40",
+        "currency": "USD",
+        "date": "2021-11-02",
+        "balance": "4747.78",
+        "type": "Credit card",
+        "category": "2",
+        "notes": "Breakfast Company"
+    },
+    {
+        "transactionId": "2",
+        "accountId": "1",
+        "userId":"618504cee6d8a3fc8239204c",
+        "description": "Joe SuperMarket",
+        "amount": "35.25",
+        "currency": "USD",
+        "date": "2021-11-02",
+        "balance": "4707.78",
+        "type": "Credit card",
+        "category": "2",
+        "notes": null
+    },
+    {
+        "transactionId": "3",
+        "accountId": "1",
+        "userId":"618504cee6d8a3fc8239204c",
+        "description": "Netflix",
+        "amount": "10.39",
+        "currency": "USD",
+        "date": "2021-11-04",
+        "balance": "4672.53",
+        "type": "Credit card",
+        "category": "1",
+        "notes": null
+    },
+    {   
+        "transactionId": "4",
+        "accountId": "2",
+        "userId":"618504cee6d8a3fc8239204c",
+        "description": "Automatic transfer",
+        "amount": "250",
+        "currency": "USD",
+        "date": "2021-11-01",
+        "balance": "35743.09",
+        "type": "Transfer",
+        "category": "4",
+        "notes": null
+    },
+    {
+        "transactionId": "5",
+        "accountId": "3",
+        "userId":"618504cee6d8a3fc8239204c",
+        "description": "SuperMarket Joe",
+        "amount": "500",
+        "currency": "USD",
+        "date": "2021-11-03",
+        "balance": "52.65",
+        "type": "Credit card",
+        "category": "2",
+        "notes": null
+    },
+    {
+        "transactionId": "6",
+        "accountId": "3",
+        "userId":"618504cee6d8a3fc8239204c",
+        "description": "Apple Store",
+        "amount": "500",
+        "currency": "USD",
+        "date": "2021-11-03",
+        "balance": "552.65",
+        "type": "Credit card",
+        "category": "3",
+        "notes": null
+    }
+]
