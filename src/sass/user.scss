@@ -109,29 +109,6 @@
 .bg-light {
     background-color: #DDE2EA;
 }
-
-.transaction-list {
-    height: 65vh;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin: 0 auto;
-    align-items: center;
-    width: 30%;
-}
-
-.img-worker {
-    height: 200px;
-}
-
-.temporary-text {
-    background-color:  #6458F5;
-    border-radius: 10px;
-    padding: 15px;
-    color: #FFFFFF;
-    font-size: 1.7rem;
-
-}
   
 @media (min-width: 720px) {
     .account {

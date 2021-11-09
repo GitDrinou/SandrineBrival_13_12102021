@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: features/loginSlice.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: features/loginSlice.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { LOGIN_API, secureKey, USER_API } from "../utils/constants"
+import { clientPost, clientPostAuthentication } from "../api/client"
+
+// initial state for login
+const initialState = {
+    userInfos:[],
+    status: 'idle',
+    error: null,
+    userStatus: 'idle',
+    token: null,
+}
+
+
+/**
+ * @constant fetchLoginUser 
+ * function createAsyncThunk (action type, async function returning a promise)
+ * @returns the result of the query user
+*/
+export const fetchLoginUser = createAsyncThunk(
+    'login/checkUser',
+    async (userDatas) => {
+        const response = await clientPost(LOGIN_API, userDatas)
+        return response.data
+    }    
+)
+
+
+/**
+ * @constant fetchUser 
+ * function createAsyncThunk (action type, async function returning a promise)
+ * @returns the user infos like firstName and lastName
+*/
+export const fetchUser = createAsyncThunk(
+    'login/fetchUser',
+    async(userToken) => {
+        const response = await clientPostAuthentication(USER_API, userToken)
+        return response.data
+    }
+)
+
+
+/**
+ * @constant loginSlice
+ * function createSlice is a function that accepts : initial state, slice name, reducers functions, 
+ * which generate actions creators and actions types - Redux Toolkit
+ * extraReducers is used with createAsyncThunk
+ */
+const loginSlice  = createSlice ({
+    name: 'login',
+    initialState,
+    reducers: {
+        logOut(state,action) {
+            state.userInfos = []
+            state.status = 'idle'
+            state.userStatus = 'idle'
+            state.token = null
+            sessionStorage.removeItem(secureKey)
+            sessionStorage.removeItem("isEdited")
+        }
+    },
+    extraReducers(builder){
+        builder
+            .addCase(fetchLoginUser.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(fetchLoginUser.fulfilled, (state, action) => {
+                state.status= 'succeeded'
+                if(state.error !== null) state.error = null
+                state.token = 'Bearer'.concat(action.payload.body.token)
+            })
+            .addCase(fetchLoginUser.rejected, (state,action) => {
+                state.status = 'failed'
+                action.error.message === "Rejected" ? state.error = "Error : connection server" : state.error = action.error.message
+                sessionStorage.removeItem(secureKey)
+            })
+            .addCase(fetchUser.fulfilled, (state, action) => {
+                state.userStatus= 'succeeded'
+                if(state.error !== null) state.error = null
+                state.userInfos = {
+                    email: action.payload.body.email,
+                    firstName: action.payload.body.firstName,
+                    lastName: action.payload.body.lastName,
+                    id: action.payload.body.id
+                }
+            })  
+    }
+})
+
+export const { logOut } = loginSlice.actions
+
+export default loginSlice.reducer
+
+
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AccountCard">AccountCard</a></li><li><a href="global.html#Accounts">Accounts</a></li><li><a href="global.html#AccountsHeader">AccountsHeader</a></li><li><a href="global.html#AccountsHeaderEdit">AccountsHeaderEdit</a></li><li><a href="global.html#accountSlice">accountSlice</a></li><li><a href="global.html#AccountsList">AccountsList</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#capitalizeString">capitalizeString</a></li><li><a href="global.html#clientGetAuthentication">clientGetAuthentication</a></li><li><a href="global.html#clientPost">clientPost</a></li><li><a href="global.html#clientPostAuthentication">clientPostAuthentication</a></li><li><a href="global.html#clientPutAuthentication">clientPutAuthentication</a></li><li><a href="global.html#configureStore">configureStore</a></li><li><a href="global.html#fetchAccounts">fetchAccounts</a></li><li><a href="global.html#fetchLoginUser">fetchLoginUser</a></li><li><a href="global.html#fetchTransactions">fetchTransactions</a></li><li><a href="global.html#fetchUser">fetchUser</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#HomeCard">HomeCard</a></li><li><a href="global.html#homeFeatures">homeFeatures</a></li><li><a href="global.html#Login">Login</a></li><li><a href="global.html#LoginForm">LoginForm</a></li><li><a href="global.html#loginSlice">loginSlice</a></li><li><a href="global.html#Profile">Profile</a></li><li><a href="global.html#styled">styled</a></li><li><a href="global.html#Transaction">Transaction</a></li><li><a href="global.html#TransactionCard">TransactionCard</a></li><li><a href="global.html#transactionSlice">transactionSlice</a></li><li><a href="global.html#TransactionsList">TransactionsList</a></li><li><a href="global.html#userDatasUpdated">userDatasUpdated</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Tue Nov 09 2021 14:13:26 GMT+0100 (heure normale d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

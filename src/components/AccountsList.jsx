@@ -1,5 +1,10 @@
 import AccountCard from "./AccountCard";
 
+/**
+ * @constant { function } AccountsList
+ * @param {*} props account datas
+ * @returns DOM element diplaying user profile accounts's list
+ */
 const AccountsList = (props) => {
 
     return (

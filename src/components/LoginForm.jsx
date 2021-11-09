@@ -3,8 +3,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
 import { fetchLoginUser } from '../features/loginSlice'
 import '../sass/form.scss'
-import { ROUTE_PROFILE } from '../utils/constants'
+import { ROUTE_PROFILE, userLogs } from '../utils/constants'
 
+/**
+ * @constant { function } LoginForm
+ * @returns DOM elements of the sign in form
+ */
 const LoginForm = () => {
 
     let errorMsg
@@ -18,27 +22,37 @@ const LoginForm = () => {
     const loginStatus = useSelector(state => state.login.status)
     const loginError = useSelector(state => state.login.error)
 
+    // Event handle on email input change : 
+    // - remove local storage user logs
+    // - update locally the email data
     const onUserNameChanged = (e) => { 
-        if (localStorage.getItem("logsAB") !== null) localStorage.removeItem("logsAB")
+        if (localStorage.getItem(userLogs) !== null) localStorage.removeItem(userLogs)
         setEmail(e.target.value) 
     }
+
     const onPasswordChanged = (e) => { setPassword(e.target.value) }
     
     const canSave = [email, password].every(Boolean)
 
+    // Event handle click change checkbox :
+    // update the locally state
+    // Set the local storage userLogs with datas or remove the local storage datas if unchecked
    const onRememberCheckChanged = (e) => { 
         let valCheck = e.target.checked
         
         if (valCheck === true) {
             setRememberCheck(true)
-            localStorage.setItem("logsAB",JSON.stringify({ email, password, valCheck }))
+            localStorage.setItem(userLogs,JSON.stringify({ email, password, valCheck }))
         }
         else if (valCheck === false) {
             setRememberCheck(false)
-            localStorage.removeItem("logsAB")
+            localStorage.removeItem(userLogs)
         }               
     }
     
+    // Event handle click Sign In button :
+    // launch dispatch function fetchLoginuser to verify access logs
+    // check if the rememeber checkbox is checked or not to update the locally states
     const onSignInClicked = () => {
         if(canSave) {
             dispatch(fetchLoginUser({ email, password }))                
@@ -49,9 +63,10 @@ const LoginForm = () => {
         }                   
     }
   
-    useEffect(() => {
-        
-        if (localStorage.getItem("logsAB") !=null) {  
+    // React hook use to filled inputs with save datas in local storage
+    // change the route to Profile's page if logs are found in database
+    useEffect(() => {        
+        if (localStorage.getItem(userLogs) !=null) {  
             let userLogs = JSON.parse(localStorage.getItem("logsAB"))       
             setEmail(userLogs.email)
             setPassword(userLogs.password)
@@ -62,6 +77,7 @@ const LoginForm = () => {
         }
     }, [loginStatus,history])
     
+
     if (loginStatus === 'failed') {
         errorMsg = <span className="error-message"> {loginError} </span>
     }

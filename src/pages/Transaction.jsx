@@ -1,43 +1,51 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import AccountCard from "../components/AccountCard"
-import { fetchUser } from "../features/loginSlice"
-import { fetchAccounts } from "../features/accountSlice"
 import { fetchTransactions } from "../features/transactionSlice"
-import { TITLE_PAGE_TRANSACTION, secureKey } from "../utils/constants"
+import { TITLE_PAGE_TRANSACTION, secureKey, accountsSession, currentMonth } from "../utils/constants"
 import TransactionsList from "../components/TransactionsList"
+import { fetchUser } from "../features/loginSlice"
 
 /**
- * COMPONENT Transaction
- * @param { * } match - matching params (transaction ID)
- * @returns the account's amount selected and transaction's list
+ * COMPONENT FUNCTION
+ * @returns DOM elements for the user's transactions for a selected account
  */
-const Transaction = ({ match }) => {
+function Transaction() {
 
     const dispatch = useDispatch()
     const keyLogin = useSelector(state => state.login.token)
     const sessionKey = sessionStorage.getItem(secureKey)
     
     if (keyLogin)  {
-        sessionStorage.setItem("tokenArgentBank", keyLogin)        
+        sessionStorage.setItem(secureKey, keyLogin)      
     }  
    
     const keyPass = (keyLogin) ? keyLogin : sessionKey
-
-    // Change the title of the web page
-    // launch the fetchUser action only if session data is not null ( user is still connected )
+    
+    // React hook use to display page title
+    // launch the fetchUser function to verify if user is still connected
+    // launch the fetchTransaction function to display transactions
     useEffect(() => {
-        document.title = TITLE_PAGE_TRANSACTION        
-        dispatch(fetchUser(keyPass))          
-        dispatch(fetchAccounts(keyPass))
+        document.title = TITLE_PAGE_TRANSACTION 
+        dispatch(fetchUser(keyPass))       
         dispatch(fetchTransactions(keyPass))        
     }, [dispatch, keyPass])
+   
+    const selectAccount = JSON.parse(sessionStorage.getItem(accountsSession))
 
-    const accountId = match.params.accountId    // get the Route param idTransaction
-        
-    const userAccounts = useSelector(state => state.account.accounts)
-    const selectAccount = userAccounts.find( elt => elt.accountId === accountId)
-    
+    const userTransactions = useSelector(state => state.transaction.transactions)
+
+    // ordering transactions
+    const orderedTransaction = userTransactions
+            .slice()
+            .sort((a, b) => b.transactionId-a.transactionId)
+
+    // filtering transaction of the selected account 
+    // This filter is temporary use before PHASE 2
+    const selectTransactions = orderedTransaction.filter((e) => 
+        e.accountId === selectAccount.accountId && e.month === currentMonth.toString()
+    )
+     
     return (
         <div>
             <div className='mainUser bg-light'>
@@ -49,9 +57,9 @@ const Transaction = ({ match }) => {
                     status = {selectAccount.status}
                     idTransaction = {selectAccount.id}
                     isViewMode = {true}
-                    accountId = {accountId}
-                />
-                <TransactionsList accountId={selectAccount.accountId} />
+                    accountId = {selectAccount.accountId}
+                /> 
+                <TransactionsList selectTransactions = {selectTransactions} />                
             </div>            
         </div>
     )

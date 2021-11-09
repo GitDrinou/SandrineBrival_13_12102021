@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: components/common/Header.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,75 +17,85 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: components/common/Header.jsx</h1>
 
     
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h1>Openclassrooms - Project #13</h1>
-<p>This repo GitHub contains all the source code to run the Argent Bank application build with React and Redux.</p>
-<h2>Prerequisites</h2>
-<ul>
-<li><a href="https://nodejs.org/en/">NodeJS (<strong>version 12.18</strong>)</a></li>
-<li><a href="https://yarnpkg.com/">Yarn</a></li>
-</ul>
-<p>If you are working with several versions of NodeJS, we recommend you install <a href="https://github.com/nvm-sh/nvm">nvm</a>. This tool will allow you to easily manage your NodeJS versions.</p>
-<h2>Dependencies installation</h2>
-<p>Execute this command to install all dependencies of this project</p>
-<h3><code>npm install </code></h3>
-<h2>Lauching the project</h2>
-<h3>1. Open the project on your IDE (here we use VSCode)</h3>
-<ul>
-<li>Fork the repository</li>
-<li>Clone it on your computer</li>
-<li>install dependencies if necessary</li>
-</ul>
-<h3>2. Run API Server (Backend)</h3>
-<ul>
-<li>Go to this repo : https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API</li>
-<li>Follow the steps in README file to launch the API</li>
-</ul>
-<p>Do not close this terminal tab otherwise the link between the API and React apps will not work.</p>
-<h3>3. Run the React App project</h3>
-<ul>
-<li>Open a new terminal ( project folder )</li>
-<li>Execute the following npm command : <code>npm start </code></li>
-</ul>
-<p>After doing these steps, normally the React app is launched on your default browser at this address : <a href="http://localhost:3000">http://localhost:3000</a></p>
-<h2>Launching JSDOC Documentation HTML page</h2>
-<p>If you don't have it, install the LiveServer VSCode extension.
-Otherwise, follow theses steps :</p>
-<ul>
-<li>open 'docs' folder on your project's file tree</li>
-<li>open the 'index.html' file</li>
-<li>two ways to launch the page on your browser :
-1 / do a right click and select 'Open with Live Server'
-2/ click on 'Go Live' visible on the IDE's task bar to run the live server and click on 'docs' link in the index page (live server)</li>
-</ul></article>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Link } from 'react-router-dom'
+import { ROUTE_HOME, ROUTE_LOGIN, ROUTE_PROFILE } from '../../utils/constants'
+import LogoIllustration from '../../assets/argentBankLogo.png'
+import '../../sass/header.scss'
+import styled from 'styled-components'
+import { useDispatch } from 'react-redux'
+import { logOut } from '../../features/loginSlice'
+import { useSelector } from 'react-redux'
+
+/**
+ * @constant styled component for Link component
+ */
+const StyledLink = styled(Link)`
+    font-weight: bold;
+    color: #2c3e50;
+`
+
+/**
+ * COMPONENT FUNCTION
+ * @returns the DOM elements for the Header
+ */
+function Header() {
+
+    const dispatch = useDispatch()
+    const userName = useSelector(state => state.login.userInfos.firstName)
+
+    // function to dispatch logOut reducer
+    const handleSignOut = () => {
+        dispatch(logOut())
+    }
+        
+    return ( 
+        &lt;div className="main-nav">
+            &lt;StyledLink to={ROUTE_HOME} className="main-nav-logo">
+                &lt;img
+                    className="main-nav-logo-image"
+                    src={LogoIllustration}
+                    alt="Argent Bank Logo"
+                />
+                &lt;h1 className="sr-only">Argent Bank&lt;/h1>
+            &lt;/StyledLink>
+            &lt;div>
+                { 
+                    userName === undefined ? (
+                        &lt;Link to={ROUTE_LOGIN} className="main-nav-item">
+                            &lt;i className="fa fa-user-circle header-signIn">&lt;/i>
+                            &lt;span className="main-nav-item-text-signIn">Sign In&lt;/span>
+                        &lt;/Link>
+                    ) :
+                    (
+                        &lt;div className="main-nav-item-group">
+                            &lt;Link to={ROUTE_PROFILE} className="main-nav-item">
+                                &lt;i className="fa fa-user-circle header-signIn">&lt;/i>
+                                &lt;span className="main-nav-item-text">{userName}&lt;/span>
+                            &lt;/Link>
+                            &lt;Link to={ROUTE_HOME} className="main-nav-item" onClick={handleSignOut}>
+                                &lt;i className="fa fa-sign-out header-signOut">&lt;/i>
+                                &lt;span className="main-nav-item-text">Sign out&lt;/span>
+                            &lt;/Link>
+                        &lt;/div>
+                    )
+                }                               
+            &lt;/div>
+        &lt;/div>
+    )
+}
+
+export default Header</code></pre>
+        </article>
     </section>
-
-
 
 
 

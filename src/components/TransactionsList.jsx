@@ -1,12 +1,43 @@
 import '../sass/user.scss'
-import WorkerIllustration from '../assets/worker.svg'
+import '../sass/transaction.scss'
+import TransactionCard from './TransactionCard'
 
+/**
+ * @constant { function } TransactionsList
+ * @param {*} props transactions datas
+ * @returns DOM element diplaying transactions list
+ */
 const TransactionsList = (props) => {
-
+    
+    const selectTransactions = props.selectTransactions
+    
     return (
-        <div className="transaction-list">
-            <span className="temporary-text">The transactions's list is not available yet. </span>
-            <img src={WorkerIllustration} alt="Under construction" className="img-worker" />
+        <div className="transaction-list-wrapper">
+            <ul className="transaction-content">
+                <li className="transaction-content-header">
+                    <span>&nbsp;</span>
+                    <span>DATE</span>
+                    <span>DESCRIPTION</span>
+                    <span>AMOUNT</span>
+                    <span>BALANCE</span>
+                </li>
+                { 
+                    selectTransactions && selectTransactions.map((card, index) => (                        
+                        <TransactionCard 
+                            key={`${index}`} 
+                            transactionId={card.transactionId}
+                            description={card.description}
+                            balance={card.balance}
+                            notes={card.notes}
+                            categoryId={card.categoryId}
+                            amount={card.amount}
+                            date={card.date}
+                            currency={card.currency}
+                            type={card.type}
+                        />
+                    ))
+                }
+            </ul>  
         </div>
     ) 
 }

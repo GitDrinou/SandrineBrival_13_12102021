@@ -1,4 +1,9 @@
 
+/**
+ * @constant { function } AccountsHeader
+ * @param {*} props user datas
+ * @returns DOM element diplaying account's header with the Edit button
+*/
 const AccountsHeader = (props) => {
 
     return (

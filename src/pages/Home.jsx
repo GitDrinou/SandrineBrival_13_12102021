@@ -5,8 +5,13 @@ import { homeFeatures } from '../utils/constants'
 import HomeCard from '../components/HomeCard'
 
 
+/**
+ * COMPONENT FUNCTION
+ * @returns DOM elements for the home page
+ */
 function Home() {
 
+    // React hook use to display the page title
     useEffect(() => {
         document.title = TITLE_PAGE_HOME
     }, [])

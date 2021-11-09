@@ -4,11 +4,13 @@ import { TITLE_PAGE_PROFILE, secureKey } from "../utils/constants"
 import Accounts from "../components/Accounts"
 import { useDispatch } from "react-redux"
 import { fetchUser } from "../features/loginSlice"
+
+
 /**
- * COMPONENT PAGE Profile
- * @returns the login component if the user is not connected and user component if user is connected successfully
+ * COMPONENT FUNCTION
+ * @returns DOM Elements for the user's profile page
  */
-const Profile = () => {
+function Profile() {
 
     const dispatch = useDispatch()
     const keyLogin = useSelector(state => state.login.token)
@@ -20,7 +22,8 @@ const Profile = () => {
    
     const keyPass = (keyLogin) ? keyLogin : sessionKey
 
-    // Change the title page
+    // React hook use for display the profile title page
+    // and to dispatch the fetchUser action function
     useEffect(() => {
         document.title = TITLE_PAGE_PROFILE
         dispatch(fetchUser(keyPass))          
@@ -30,8 +33,6 @@ const Profile = () => {
     const lastName = useSelector(state => state.login.userInfos.lastName)   // select the lastName value from the store
     const idUser = useSelector(state => state.login.userInfos.id)           // select the id value frome the store
 
-    // console.log(sessionStorage.getItem(secureKey))
-    // console.log(isConnected) 
 
     return (
         <div>

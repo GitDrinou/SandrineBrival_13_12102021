@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: pages/Transaction.jsx</title>
+    <title>JSDoc: Source: components/AccountCard.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: pages/Transaction.jsx</h1>
+    <h1 class="page-title">Source: components/AccountCard.jsx</h1>
 
     
 
@@ -26,74 +26,79 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import AccountCard from "../components/AccountCard"
-import { fetchTransactions } from "../features/transactionSlice"
-import { TITLE_PAGE_TRANSACTION, secureKey, accountsSession, currentMonth } from "../utils/constants"
-import TransactionsList from "../components/TransactionsList"
-import { fetchUser } from "../features/loginSlice"
+            <pre class="prettyprint source linenums"><code>import { capitalizeString } from "../utils/functions"
+import { useSelector } from "react-redux"
+import { Link } from "react-router-dom"
+import { accountsSession, ROUTE_TRANSACTION } from "../utils/constants"
 
 /**
- * COMPONENT FUNCTION
- * @returns DOM elements for the user's transactions for a selected account
+ * @constant  { function } AccountCard
+ * @param {*} props account datas
+ * @returns DOM element of each user account
  */
-function Transaction() {
+const AccountCard = (props) => {
 
-    const dispatch = useDispatch()
-    const keyLogin = useSelector(state => state.login.token)
-    const sessionKey = sessionStorage.getItem(secureKey)
-    
-    if (keyLogin)  {
-        sessionStorage.setItem(secureKey, keyLogin)      
-    }  
-   
-    const keyPass = (keyLogin) ? keyLogin : sessionKey
-    
-    // React hook use to display page title
-    // launch the fetchUser function to verify if user is still connected
-    // launch the fetchTransaction function to display transactions
-    useEffect(() => {
-        document.title = TITLE_PAGE_TRANSACTION 
-        dispatch(fetchUser(keyPass))       
-        dispatch(fetchTransactions(keyPass))        
-    }, [dispatch, keyPass])
-   
-    const selectAccount = JSON.parse(sessionStorage.getItem(accountsSession))
+    let btnTransactionStyle, content
 
-    const userTransactions = useSelector(state => state.transaction.transactions)
+    const formatAmount =  new Intl.NumberFormat('en-US', { style: 'currency', currency: props.currency })
+    const amount = formatAmount.format(props.amount)
 
-    // ordering transactions
-    const orderedTransaction = userTransactions
-            .slice()
-            .sort((a, b) => b.transactionId-a.transactionId)
+    const isEditMode = useSelector(state => state.account.isEditMode)
 
-    // filtering transaction of the selected account 
-    // This filter is temporary use before PHASE 2
-    const selectTransactions = orderedTransaction.filter((e) => 
-        e.accountId === selectAccount.accountId &amp;&amp; e.month === currentMonth.toString()
-    )
-     
+    switch(isEditMode) {
+        case "true":
+            btnTransactionStyle = "transaction-button-blue"
+            break
+        default:
+            btnTransactionStyle = "transaction-button-green"
+            break
+    }
+
+    // set a session storage with account data clicked to display
+    const handleSessionStoreAccount = () => {
+        sessionStorage.removeItem(accountsSession)
+        sessionStorage.setItem(accountsSession, JSON.stringify({
+            accountId: props.accountId,
+            currency: props.currency,
+            accountNumber: props.accountNumber, 
+            type: props.type,
+            amount: props.amount,
+            status: props.status
+        }))
+    }
+
+    // change the render DOM if user clicked on Edit button or not
+    if (props.isViewMode) {
+        content = &lt;div className="account-view">
+                    &lt;div className="account-content-wrapper">
+                        &lt;h3 className="account-title">Argent Bank {props.type} ({props.accountNumber})&lt;/h3>
+                        &lt;p className="account-amount">{amount}&lt;/p>
+                        &lt;p className="account-amount-description">{capitalizeString(props.status)} Balance&lt;/p>
+                    &lt;/div>
+                &lt;/div>
+    }
+    else {
+        content = &lt;div className="account">
+                    &lt;div className="account-content-wrapper">
+                        &lt;h3 className="account-title">Argent Bank {props.type} ({props.accountNumber})&lt;/h3>
+                        &lt;p className="account-amount">{amount}&lt;/p>
+                        &lt;p className="account-amount-description">{capitalizeString(props.status)} Balance&lt;/p>
+                    &lt;/div>
+                    &lt;div className="account-content-wrapper cta">
+                        &lt;Link to={ROUTE_TRANSACTION} className={btnTransactionStyle}  onClick={handleSessionStoreAccount}>View transactions&lt;/Link>
+                    &lt;/div>
+                &lt;/div>
+    }
+
     return (
         &lt;div>
-            &lt;div className='mainUser bg-light'>
-                &lt;AccountCard 
-                    type = {selectAccount.type}
-                    accountNumber = {selectAccount.accountNumber}
-                    amount = {selectAccount.amount}
-                    currency = {selectAccount.currency}
-                    status = {selectAccount.status}
-                    idTransaction = {selectAccount.id}
-                    isViewMode = {true}
-                    accountId = {selectAccount.accountId}
-                /> 
-                &lt;TransactionsList selectTransactions = {selectTransactions} />                
-            &lt;/div>            
+            { content }
         &lt;/div>
     )
 }
 
-export default Transaction</code></pre>
+export default AccountCard
+</code></pre>
         </article>
     </section>
 

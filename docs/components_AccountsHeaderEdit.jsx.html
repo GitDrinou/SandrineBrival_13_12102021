@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: components/AccountsHeaderEdit.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,75 +17,85 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: components/AccountsHeaderEdit.jsx</h1>
 
     
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h1>Openclassrooms - Project #13</h1>
-<p>This repo GitHub contains all the source code to run the Argent Bank application build with React and Redux.</p>
-<h2>Prerequisites</h2>
-<ul>
-<li><a href="https://nodejs.org/en/">NodeJS (<strong>version 12.18</strong>)</a></li>
-<li><a href="https://yarnpkg.com/">Yarn</a></li>
-</ul>
-<p>If you are working with several versions of NodeJS, we recommend you install <a href="https://github.com/nvm-sh/nvm">nvm</a>. This tool will allow you to easily manage your NodeJS versions.</p>
-<h2>Dependencies installation</h2>
-<p>Execute this command to install all dependencies of this project</p>
-<h3><code>npm install </code></h3>
-<h2>Lauching the project</h2>
-<h3>1. Open the project on your IDE (here we use VSCode)</h3>
-<ul>
-<li>Fork the repository</li>
-<li>Clone it on your computer</li>
-<li>install dependencies if necessary</li>
-</ul>
-<h3>2. Run API Server (Backend)</h3>
-<ul>
-<li>Go to this repo : https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API</li>
-<li>Follow the steps in README file to launch the API</li>
-</ul>
-<p>Do not close this terminal tab otherwise the link between the API and React apps will not work.</p>
-<h3>3. Run the React App project</h3>
-<ul>
-<li>Open a new terminal ( project folder )</li>
-<li>Execute the following npm command : <code>npm start </code></li>
-</ul>
-<p>After doing these steps, normally the React app is launched on your default browser at this address : <a href="http://localhost:3000">http://localhost:3000</a></p>
-<h2>Launching JSDOC Documentation HTML page</h2>
-<p>If you don't have it, install the LiveServer VSCode extension.
-Otherwise, follow theses steps :</p>
-<ul>
-<li>open 'docs' folder on your project's file tree</li>
-<li>open the 'index.html' file</li>
-<li>two ways to launch the page on your browser :
-1 / do a right click and select 'Open with Live Server'
-2/ click on 'Go Live' visible on the IDE's task bar to run the live server and click on 'docs' link in the index page (live server)</li>
-</ul></article>
+        <article>
+            <pre class="prettyprint source linenums"><code>import '../sass/user.scss'
+import '../sass/form.scss'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { userDataCancelled, userDatasUpdated} from '../features/accountSlice'
+import { useSelector } from 'react-redux'
+import { fetchUser } from '../features/loginSlice'
+import { secureKey } from '../utils/constants'
+
+/**
+ * @constant { function } AccountsHeaderEdit
+ * @param {*} props user datas
+ * @returns DOM element diplaying account's header with the update form (2 inputs, 2 buttons)
+ */
+const AccountsHeaderEdit = (props) => {
+
+    const [firstName, setnewFirstName] = useState('')
+    const [lastName, setnewLastName] = useState('')
+
+    const onChangeFirstName = (e) => { setnewFirstName(e.target.value) }
+    const onChangeLastName = (e) => { setnewLastName(e.target.value) }
+
+    const canSave = Boolean(firstName) || Boolean(lastName) 
+
+    const dispatch = useDispatch()
+
+    const loginKey = useSelector(state => state.login.token)
+    const sessionKey = sessionStorage.getItem(secureKey)
+
+    const keyPass = loginKey ? loginKey : sessionKey
+
+    // event handle click Save button
+    // launch dispatch function userDatasUpdated
+    // launch dispatch function fetchUser to display the new updates
+    const handleClickSave = () => {
+        sessionStorage.removeItem('isEdited')
+        if(canSave) {
+            dispatch(userDatasUpdated({ firstName, lastName, keyPass }))
+            dispatch(fetchUser(keyPass))
+        }        
+    }
+
+    // Event handle click Cancel button
+    // launch dispatch function userDatasCancelled
+    const handleClickCancel = () => {
+       dispatch(userDataCancelled())
+    }
+
+
+    return (
+        &lt;div className="header header-edit">
+            &lt;h1>Welcome back&lt;/h1>
+            &lt;form className="frmEditUser">
+                &lt;div className="input-group">
+                    &lt;input type="text" placeholder={props.firstName} size="15" onChange={onChangeFirstName} value={firstName} />
+                    &lt;input type="text" placeholder={props.lastName} size="15" onChange={onChangeLastName} value={lastName} />
+                &lt;/div>
+                
+                &lt;div className="button-group">
+                    &lt;button  type="button" className="save-button" onClick={handleClickSave}>Save&lt;/button>
+                    &lt;button  type="button" className="cancel-button" onClick={handleClickCancel}>Cancel&lt;/button>
+                &lt;/div>
+            &lt;/form>
+        &lt;/div>
+    )
+}
+
+export default AccountsHeaderEdit</code></pre>
+        </article>
     </section>
-
-
 
 
 

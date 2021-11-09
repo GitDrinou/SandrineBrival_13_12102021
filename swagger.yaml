@@ -34,61 +34,6 @@ paths:
           description: Invalid Field
         '500':
           description: Internal Server Error
-  /user/transaction:
-    get:
-      security:
-        - Bearer: []
-      tags:
-        - Account Module
-      summary: Find transactions by account
-      description: Display a list of transactions for a specific account
-      parameters:
-        - in: header
-          name: Authorization
-          description: Attach Bearer JWT user token
-          type: string
-          required: true
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: Successful operation
-          schema:
-            $ref: '#/definitions/TransactionsResponse'
-        '400':
-          description: Invalid Field
-        '500':
-          description: Internal Server Error
-    put:
-      security:
-        - Bearer: []
-      tags:
-        - Account Module
-      summary: Update transaction informations (category, notes)
-      description: Updating informations to a specific transaction
-      parameters:
-        - in: header
-          name: Authorization
-          description: Attach Bearer JWT user token
-          type: string
-          required: true
-        - in: body
-          name: body
-          description: transaction ID
-          required: true
-          schema:
-            $ref: '#/definitions/TransactionsInfos'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: Successful operation
-          schema:
-            $ref: '#/definitions/TransactionsAPIResponse'
-        '400':
-          description: Invalid Field
-        '500':
-          description: Internal Server Error
   /account/category:
     get:
       tags:
@@ -106,63 +51,86 @@ paths:
           description: Catgories not found
         '500':
           description: Internal Server Error
-    post:
-        tags:
-          - Account Module
-        summary: Add a new category
-        description: Adding a new category for transaction
-        parameters:
+  /user/{accountId}/transactions/{currentMonth}:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Account Module
+      summary: Find user transactions by account ID for the current month
+      description: Display a list of transactions for a specific account
+      operationId: "getCurrentTransactionsByAccountId"
+      parameters:
+        - name: "accountId"
+          in: "path"
+          description: "ID of account to be fetched for transactions displaying"
+          required: true
+          type: "string"
+        - name: "currentMonth"
+          in: "path"
+          description: "Number of the current month to be fetched"
+          required: true
+          type: "string"
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT user token
+          type: string
+          required: true
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/TransactionsResponse'
+        '400':
+          description: Invalid ID or Month Number
+        '404':
+          description: Transactions not found
+        '500':
+          description: Internal Server Error
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - Account Module
+      summary: Update transactions informations (category, notes)
+      description: Updating informations to a specific transaction
+      parameters:
+        - name: "accountId"
+          in: "path"
+          description: "ID of account to be fetched for transactions displaying"
+          required: true
+          type: "string"
+        - name: "currentMonth"
+          in: "path"
+          description: "Number of the current month to be fetched"
+          required: true
+          type: "string"
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT user token
+          type: string
+          required: true
         - in: body
           name: body
-          description: category ID
+          description: category ID and notes 
           required: true
           schema:
-            $ref: '#/definitions/Categories'
-        produces:
-          - application/json
-        responses:
-          '200':
-            description: Successful operation
-            schema:
-              $ref: '#/definitions/TransactionCategoryResponse'
-          '400':
-            description: Catgories not found
-          '500':
-            description: Internal Server Error
-    put:
-        tags:
-          - Account Module
-        summary: Update a category
-        description: Updating a category for transaction
-        produces:
-          - application/json
-        responses:
-          '200':
-            description: Successful operation
-            schema:
-              $ref: '#/definitions/TransactionCategoryResponse'
-          '400':
-            description: Catgories not found
-          '500':
-            description: Internal Server Error
-    delete:
-        tags:
-          - Account Module
-        summary: delete a category
-        description: delete a category
-        parameters:
-          - in: body
-            name: body
-            required: true
-            schema:
-              $ref: '#/definitions/Categories'
-        responses:
-          '200':
-            description: category was deleted
-          '404':
-            description: category not found
-          '500':
-            description: Internal Server Error
+            $ref: '#/definitions/TransactionsInfos'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/TransactionsAPIResponse'
+        '400':
+          description: Invalid ID or Month Number
+        '404':
+          description: Transactions not found
+        '500':
+          description: Internal Server Error
   /user/login:
     post:
       tags:
@@ -285,28 +253,12 @@ definitions:
   TransactionsInfos:
     type: object
     properties:
-      transactionId:
-        type: string
-        description: transaction id
       notes:
         type: string
         description: transaction notes
       categoryId:
         type: string
         description: category Id
-  TransactionsCategory:
-    properties:
-      transactionId:
-        type: string
-        description: transaction id
-      categoryId:
-        type: string
-        description: category Id
-  Categories:
-    properties:
-      categoryId:
-        type: string
-        description: category id
   User:
     properties:
       email:
@@ -356,12 +308,12 @@ definitions:
           id: 
             type: string
             description: transaction id
-          date:
+          notes:
             type: string
-            description: transaction date
-          description:
+            description: transaction notes
+          categoryId:
             type: string
-            description: transaction description
+            description: transaction category ID
   LoginResponse:
     type: object
     properties:
@@ -395,7 +347,7 @@ definitions:
     type: object
     properties:
       userId:
-        type: String
+        type: string
         description: user ID
       accountId:
         type: string

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/LoginForm.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/LoginForm.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router'
+import { fetchLoginUser } from '../features/loginSlice'
+import '../sass/form.scss'
+import { ROUTE_PROFILE, userLogs } from '../utils/constants'
+
+/**
+ * @constant { function } LoginForm
+ * @returns DOM elements of the sign in form
+ */
+const LoginForm = () => {
+
+    let errorMsg
+    const history = useHistory()
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [rememberCheck, setRememberCheck] = useState(false)
+
+    const dispatch = useDispatch()
+    
+    const loginStatus = useSelector(state => state.login.status)
+    const loginError = useSelector(state => state.login.error)
+
+    // Event handle on email input change : 
+    // - remove local storage user logs
+    // - update locally the email data
+    const onUserNameChanged = (e) => { 
+        if (localStorage.getItem(userLogs) !== null) localStorage.removeItem(userLogs)
+        setEmail(e.target.value) 
+    }
+
+    const onPasswordChanged = (e) => { setPassword(e.target.value) }
+    
+    const canSave = [email, password].every(Boolean)
+
+    // Event handle click change checkbox :
+    // update the locally state
+    // Set the local storage userLogs with datas or remove the local storage datas if unchecked
+   const onRememberCheckChanged = (e) => { 
+        let valCheck = e.target.checked
+        
+        if (valCheck === true) {
+            setRememberCheck(true)
+            localStorage.setItem(userLogs,JSON.stringify({ email, password, valCheck }))
+        }
+        else if (valCheck === false) {
+            setRememberCheck(false)
+            localStorage.removeItem(userLogs)
+        }               
+    }
+    
+    // Event handle click Sign In button :
+    // launch dispatch function fetchLoginuser to verify access logs
+    // check if the rememeber checkbox is checked or not to update the locally states
+    const onSignInClicked = () => {
+        if(canSave) {
+            dispatch(fetchLoginUser({ email, password }))                
+            if(!rememberCheck) {
+                setEmail('')
+                setPassword('')
+            }         
+        }                   
+    }
+  
+    // React hook use to filled inputs with save datas in local storage
+    // change the route to Profile's page if logs are found in database
+    useEffect(() => {        
+        if (localStorage.getItem(userLogs) !=null) {  
+            let userLogs = JSON.parse(localStorage.getItem("logsAB"))       
+            setEmail(userLogs.email)
+            setPassword(userLogs.password)
+            setRememberCheck(userLogs.valCheck)
+        }
+        if (loginStatus === "succeeded") {
+            history.push(`${ROUTE_PROFILE}`)
+        }
+    }, [loginStatus,history])
+    
+
+    if (loginStatus === 'failed') {
+        errorMsg = &lt;span className="error-message"> {loginError} &lt;/span>
+    }
+
+    return (
+        &lt;div>
+            &lt;form>                
+                {errorMsg}
+                &lt;div className="input-wrapper">
+                    &lt;label htmlFor="username">Username&lt;/label>
+                    &lt;input type="text" id="username" value={email} onChange={onUserNameChanged} placeholder="Enter your email" required />
+                &lt;/div>
+                &lt;div className="input-wrapper">
+                    &lt;label htmlFor="password">Password&lt;/label>
+                    &lt;input type="password" id="password" value={password} onChange={onPasswordChanged} placeholder="Enter your password" required />
+                &lt;/div>
+                &lt;div className="input-remember">
+                    &lt;input type="checkbox" id="remember-me" checked={rememberCheck ? true : false} onChange={onRememberCheckChanged} />
+                    &lt;label htmlFor="remember-me">Remember me&lt;/label>
+                &lt;/div>
+                &lt;button type="button" className="btn-signIn" onClick={onSignInClicked}>Sign In&lt;/button>
+            &lt;/form>
+        &lt;/div>
+    )
+}
+
+export default LoginForm</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AccountCard">AccountCard</a></li><li><a href="global.html#Accounts">Accounts</a></li><li><a href="global.html#AccountsHeader">AccountsHeader</a></li><li><a href="global.html#AccountsHeaderEdit">AccountsHeaderEdit</a></li><li><a href="global.html#accountSlice">accountSlice</a></li><li><a href="global.html#AccountsList">AccountsList</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#capitalizeString">capitalizeString</a></li><li><a href="global.html#clientGetAuthentication">clientGetAuthentication</a></li><li><a href="global.html#clientPost">clientPost</a></li><li><a href="global.html#clientPostAuthentication">clientPostAuthentication</a></li><li><a href="global.html#clientPutAuthentication">clientPutAuthentication</a></li><li><a href="global.html#configureStore">configureStore</a></li><li><a href="global.html#fetchAccounts">fetchAccounts</a></li><li><a href="global.html#fetchLoginUser">fetchLoginUser</a></li><li><a href="global.html#fetchTransactions">fetchTransactions</a></li><li><a href="global.html#fetchUser">fetchUser</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#HomeCard">HomeCard</a></li><li><a href="global.html#homeFeatures">homeFeatures</a></li><li><a href="global.html#Login">Login</a></li><li><a href="global.html#LoginForm">LoginForm</a></li><li><a href="global.html#loginSlice">loginSlice</a></li><li><a href="global.html#Profile">Profile</a></li><li><a href="global.html#styled">styled</a></li><li><a href="global.html#Transaction">Transaction</a></li><li><a href="global.html#TransactionCard">TransactionCard</a></li><li><a href="global.html#transactionSlice">transactionSlice</a></li><li><a href="global.html#TransactionsList">TransactionsList</a></li><li><a href="global.html#userDatasUpdated">userDatasUpdated</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Tue Nov 09 2021 14:13:26 GMT+0100 (heure normale d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

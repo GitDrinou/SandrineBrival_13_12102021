@@ -1,7 +1,7 @@
 export const ROUTE_HOME = '/'
 export const ROUTE_PROFILE = '/profile'
 export const ROUTE_LOGIN = '/login'
-export const ROUTE_TRANSACTION = '/transaction/:accountId'
+export const ROUTE_TRANSACTION = '/transaction'
 
 export const TITLE_PAGE_HOME = 'Argent Bank - Home'
 export const TITLE_PAGE_SIGNIN = 'Argent Bank - Sign In'
@@ -16,6 +16,11 @@ export const ACCOUNT_API = 'http://localhost:3001/api/v1/user/account'
 export const TRANSACTION_API = 'http://localhost:3001/api/v1/user/transaction'
 
 export const secureKey = "tokenArgentBank"
+export const accountsSession = "accounts"
+export const userLogs = "logsAB"
+
+const currentDate = new Date()
+export const currentMonth = currentDate.getMonth()+1
 
 /** @constant { array } homeFeatures
  * List of home features (Chat, Money, Security,...). Use it if you want to add a new features.

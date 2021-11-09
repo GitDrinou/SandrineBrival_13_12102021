@@ -6,6 +6,11 @@ import AccountsHeader from "./AccountsHeader"
 import AccountsHeaderEdit from "./AccountsHeaderEdit"
 import { useEffect } from "react"
 
+/**
+ * @constant { function } Accounts
+ * @param {*} props account datas
+ * @returns DOM element diplaying user profile accounts
+ */
 const Accounts = (props) => {
 
     const dispatch = useDispatch()
@@ -15,13 +20,14 @@ const Accounts = (props) => {
 
     const keyPass = loginKey ? loginKey : sessionKey
 
+    // React hook use for dispatch fetchAccounts function action
     useEffect(() =>{
         dispatch(fetchAccounts(keyPass)) 
     }, [dispatch, keyPass])
 
     const userAccounts = useSelector(state => state.account.accounts)
-      
- 
+       
+    // function handle launched user data edition with dispatch userDataEdited function action
     const handleEditUserData = () => {
         dispatch(userDataEdited())
     }

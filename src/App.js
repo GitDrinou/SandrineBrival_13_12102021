@@ -11,6 +11,10 @@ import Login from './pages/Login'
 import Profile from './pages/Profile'
 import Transaction from './pages/Transaction'
 
+/**
+ * COMPONENT FUNCTION
+ * @returns application routes
+ */
 function App() {  
 
     return (

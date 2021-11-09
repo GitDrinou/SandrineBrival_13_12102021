@@ -7,16 +7,24 @@ import { useDispatch } from 'react-redux'
 import { logOut } from '../../features/loginSlice'
 import { useSelector } from 'react-redux'
 
+/**
+ * @constant styled component for Link component
+ */
 const StyledLink = styled(Link)`
     font-weight: bold;
     color: #2c3e50;
 `
+
+/**
+ * COMPONENT FUNCTION
+ * @returns the DOM elements for the Header
+ */
 function Header() {
 
     const dispatch = useDispatch()
-    
     const userName = useSelector(state => state.login.userInfos.firstName)
 
+    // function to dispatch logOut reducer
     const handleSignOut = () => {
         dispatch(logOut())
     }

@@ -2,6 +2,11 @@ import ChatIconIllustration from '../assets/icon-chat.png'
 import MoneyIconIllustration from '../assets/icon-money.png'
 import SecurityIconIllustration from '../assets/icon-security.png'
 
+/**
+ * @constant { function } HomeCard
+ * @param {*} props home datas
+ * @returns DOM element diplaying home page
+ */
 const HomeCard = (props) => {
 
     let pictureIcon

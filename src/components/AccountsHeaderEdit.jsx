@@ -7,7 +7,11 @@ import { useSelector } from 'react-redux'
 import { fetchUser } from '../features/loginSlice'
 import { secureKey } from '../utils/constants'
 
-
+/**
+ * @constant { function } AccountsHeaderEdit
+ * @param {*} props user datas
+ * @returns DOM element diplaying account's header with the update form (2 inputs, 2 buttons)
+ */
 const AccountsHeaderEdit = (props) => {
 
     const [firstName, setnewFirstName] = useState('')
@@ -25,7 +29,9 @@ const AccountsHeaderEdit = (props) => {
 
     const keyPass = loginKey ? loginKey : sessionKey
 
-
+    // event handle click Save button
+    // launch dispatch function userDatasUpdated
+    // launch dispatch function fetchUser to display the new updates
     const handleClickSave = () => {
         sessionStorage.removeItem('isEdited')
         if(canSave) {
@@ -34,6 +40,8 @@ const AccountsHeaderEdit = (props) => {
         }        
     }
 
+    // Event handle click Cancel button
+    // launch dispatch function userDatasCancelled
     const handleClickCancel = () => {
        dispatch(userDataCancelled())
     }

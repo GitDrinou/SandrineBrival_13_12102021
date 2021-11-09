@@ -6,10 +6,11 @@
         "description": "Brenda Bakery",
         "amount": "40",
         "currency": "USD",
+        "month": "11",
         "date": "2021-11-02",
         "balance": "4747.78",
         "type": "Credit card",
-        "category": "2",
+        "categoryId": "2",
         "notes": "Breakfast Company"
     },
     {
@@ -19,10 +20,11 @@
         "description": "Joe SuperMarket",
         "amount": "35.25",
         "currency": "USD",
+        "month": "11",
         "date": "2021-11-02",
         "balance": "4707.78",
         "type": "Credit card",
-        "category": "2",
+        "categoryId": "2",
         "notes": null
     },
     {
@@ -32,10 +34,11 @@
         "description": "Netflix",
         "amount": "10.39",
         "currency": "USD",
+        "month": "11",
         "date": "2021-11-04",
         "balance": "4672.53",
         "type": "Credit card",
-        "category": "1",
+        "categoryId": "1",
         "notes": null
     },
     {   
@@ -45,10 +48,11 @@
         "description": "Automatic transfer",
         "amount": "250",
         "currency": "USD",
+        "month": "11",
         "date": "2021-11-01",
         "balance": "35743.09",
         "type": "Transfer",
-        "category": "4",
+        "categoryId": "4",
         "notes": null
     },
     {
@@ -58,10 +62,11 @@
         "description": "SuperMarket Joe",
         "amount": "500",
         "currency": "USD",
+        "month": "11",
         "date": "2021-11-03",
         "balance": "52.65",
         "type": "Credit card",
-        "category": "2",
+        "categoryId": "2",
         "notes": null
     },
     {
@@ -71,10 +76,11 @@
         "description": "Apple Store",
         "amount": "500",
         "currency": "USD",
+        "month": "11",
         "date": "2021-11-03",
         "balance": "552.65",
         "type": "Credit card",
-        "category": "3",
+        "categoryId": "3",
         "notes": null
     }
 ]

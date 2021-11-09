@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import { clientGetAuthentication } from "../api/client"
 import { TRANSACTION_API } from "../utils/constants"
 
-
+// initial state for transaction
 const initialState = {
     status: 'idle',
     transactions:[],
@@ -10,6 +10,11 @@ const initialState = {
 }
 
 
+/**
+ * @constant fetchTransactions 
+ * function createAsyncThunk (action type, async function returning a promise)
+ * @returns transactions fetched
+*/
 export const fetchTransactions = createAsyncThunk(
     'account/fetchTransactions',
     async(userToken) => {
@@ -18,6 +23,13 @@ export const fetchTransactions = createAsyncThunk(
     }
 )
 
+
+/**
+ * @constant transactionSlice
+ * function createSlice is a function that accepts : initial state, slice name, reducers functions, 
+ * which generate actions creators and actions types - Redux Toolkit
+ * extraReducers is used with createAsyncThunk
+ */
 const transactionSlice  = createSlice ({
     name: 'transactions',
     initialState,
@@ -29,7 +41,7 @@ const transactionSlice  = createSlice ({
             })
             .addCase(fetchTransactions.fulfilled, (state, action) => {
                 state.status = 'succeeded'
-                state.transactions = state.transactions.concat(action.payload.body)
+                state.transactions = action.payload.body
             })
             .addCase(fetchTransactions.rejected, (state, action) => {
                 state.status = 'failed'

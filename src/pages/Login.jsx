@@ -3,9 +3,13 @@ import { TITLE_PAGE_SIGNIN,} from '../utils/constants'
 import '../sass/login.scss'
 import LoginForm from '../components/LoginForm'
 
-
-const Login = () => {
+/**
+ * COMPONENT FUNCTION
+ * @returns DOM Elements for the login page
+ */
+function Login() {
     
+    // React hook use to display the page title
     useEffect(() => {
         document.title = TITLE_PAGE_SIGNIN
     }, [])

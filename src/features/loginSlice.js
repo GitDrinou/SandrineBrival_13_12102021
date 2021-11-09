@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { LOGIN_API, secureKey, USER_API } from "../utils/constants"
 import { clientPost, clientPostAuthentication } from "../api/client"
 
-
+// initial state for login
 const initialState = {
     userInfos:[],
     status: 'idle',
@@ -11,6 +11,12 @@ const initialState = {
     token: null,
 }
 
+
+/**
+ * @constant fetchLoginUser 
+ * function createAsyncThunk (action type, async function returning a promise)
+ * @returns the result of the query user
+*/
 export const fetchLoginUser = createAsyncThunk(
     'login/checkUser',
     async (userDatas) => {
@@ -19,6 +25,12 @@ export const fetchLoginUser = createAsyncThunk(
     }    
 )
 
+
+/**
+ * @constant fetchUser 
+ * function createAsyncThunk (action type, async function returning a promise)
+ * @returns the user infos like firstName and lastName
+*/
 export const fetchUser = createAsyncThunk(
     'login/fetchUser',
     async(userToken) => {
@@ -27,6 +39,13 @@ export const fetchUser = createAsyncThunk(
     }
 )
 
+
+/**
+ * @constant loginSlice
+ * function createSlice is a function that accepts : initial state, slice name, reducers functions, 
+ * which generate actions creators and actions types - Redux Toolkit
+ * extraReducers is used with createAsyncThunk
+ */
 const loginSlice  = createSlice ({
     name: 'login',
     initialState,
