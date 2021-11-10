@@ -2,7 +2,7 @@
     {   
         "transactionId": "1",
         "accountId": "1",
-        "userId":"618504cee6d8a3fc8239204c",
+        "userId": "tony@stark.com",
         "description": "Brenda Bakery",
         "amount": "40",
         "currency": "USD",
@@ -16,7 +16,7 @@
     {
         "transactionId": "2",
         "accountId": "1",
-        "userId":"618504cee6d8a3fc8239204c",
+        "userId": "tony@stark.com",
         "description": "Joe SuperMarket",
         "amount": "35.25",
         "currency": "USD",
@@ -30,7 +30,7 @@
     {
         "transactionId": "3",
         "accountId": "1",
-        "userId":"618504cee6d8a3fc8239204c",
+        "userId": "tony@stark.com",
         "description": "Netflix",
         "amount": "10.39",
         "currency": "USD",
@@ -44,7 +44,7 @@
     {   
         "transactionId": "4",
         "accountId": "2",
-        "userId":"618504cee6d8a3fc8239204c",
+        "userId": "tony@stark.com",
         "description": "Automatic transfer",
         "amount": "250",
         "currency": "USD",
@@ -58,7 +58,7 @@
     {
         "transactionId": "5",
         "accountId": "3",
-        "userId":"618504cee6d8a3fc8239204c",
+        "userId": "tony@stark.com",
         "description": "SuperMarket Joe",
         "amount": "500",
         "currency": "USD",
@@ -72,7 +72,7 @@
     {
         "transactionId": "6",
         "accountId": "3",
-        "userId":"618504cee6d8a3fc8239204c",
+        "userId": "tony@stark.com",
         "description": "Apple Store",
         "amount": "500",
         "currency": "USD",

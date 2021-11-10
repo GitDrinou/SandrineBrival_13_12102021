@@ -28,7 +28,7 @@ function Transaction() {
     useEffect(() => {
         document.title = TITLE_PAGE_TRANSACTION 
         dispatch(fetchUser(keyPass))       
-        dispatch(fetchTransactions(keyPass))        
+        dispatch(fetchTransactions())        
     }, [dispatch, keyPass])
    
     const selectAccount = JSON.parse(sessionStorage.getItem(accountsSession))

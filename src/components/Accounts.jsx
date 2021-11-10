@@ -1,4 +1,3 @@
-import { secureKey } from "../utils/constants"
 import AccountsList from "./AccountsList"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchAccounts, userDataEdited } from "../features/accountSlice"
@@ -15,17 +14,13 @@ const Accounts = (props) => {
 
     const dispatch = useDispatch()
 
-    const loginKey = useSelector(state => state.login.token)
-    const sessionKey = sessionStorage.getItem(secureKey)
-
-    const keyPass = loginKey ? loginKey : sessionKey
-
     // React hook use for dispatch fetchAccounts function action
     useEffect(() =>{
-        dispatch(fetchAccounts(keyPass)) 
-    }, [dispatch, keyPass])
+        dispatch(fetchAccounts()) 
+    }, [dispatch])
 
-    const userAccounts = useSelector(state => state.account.accounts)
+    const accounts = useSelector(state => state.account.accounts)
+    const userAccounts = accounts.filter(elt => elt.userId === props.idUser)
        
     // function handle launched user data edition with dispatch userDataEdited function action
     const handleEditUserData = () => {

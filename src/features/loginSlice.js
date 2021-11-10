@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { LOGIN_API, secureKey, USER_API } from "../utils/constants"
+import { LOGIN_API, secureKey, userId, USER_API } from "../utils/constants"
 import { clientPost, clientPostAuthentication } from "../api/client"
 
 // initial state for login
@@ -57,6 +57,7 @@ const loginSlice  = createSlice ({
             state.token = null
             sessionStorage.removeItem(secureKey)
             sessionStorage.removeItem("isEdited")
+            sessionStorage.removeItem(userId)
         }
     },
     extraReducers(builder){

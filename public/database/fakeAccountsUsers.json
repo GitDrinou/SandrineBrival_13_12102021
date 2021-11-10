@@ -1,0 +1,56 @@
+[
+   {   
+        "accountId": "1",
+        "userId": "tony@stark.com",
+        "type": "Checking",
+        "accountNumber": "x8349",
+        "amount": "4672.53",
+        "currency": "USD",
+        "status": "available"
+    },
+    {
+        "accountId": "2",
+        "userId": "tony@stark.com",
+        "type": "Saving",
+        "accountNumber": "x6712",
+        "amount": "35743.09",
+        "currency": "USD",
+        "status": "available"
+    },
+    {
+        "accountId": "3",
+        "userId": "tony@stark.com",
+        "type": "Credit Card",
+        "accountNumber": "x8349",
+        "amount": "552.65",
+        "currency": "USD",
+        "status": "current"
+    },
+    {   
+        "accountId": "1",
+        "userId": "steve@rogers.com",
+        "type": "Checking",
+        "accountNumber": "x9438",
+        "amount": "2082.79",
+        "currency": "USD",
+        "status": "available"
+    },
+    {
+        "accountId": "2",
+        "userId": "steve@rogers.com",
+        "type": "Saving",
+        "accountNumber": "x2176",
+        "amount": "10928.42",
+        "currency": "USD",
+        "status": "available"
+    },
+    {
+        "accountId": "3",
+        "userId": "steve@rogers.com",
+        "type": "Credit Card",
+        "accountNumber": "x9438",
+        "amount": "184.30",
+        "currency": "USD",
+        "status": "current"
+    }
+] 

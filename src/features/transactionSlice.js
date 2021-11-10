@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-import { clientGetAuthentication } from "../api/client"
-import { TRANSACTION_API } from "../utils/constants"
+import { clientGet } from "../api/client"
+import { TRANSACTION_JSON } from "../utils/constants"
 
 // initial state for transaction
 const initialState = {
@@ -18,7 +18,7 @@ const initialState = {
 export const fetchTransactions = createAsyncThunk(
     'account/fetchTransactions',
     async(userToken) => {
-        const response = await clientGetAuthentication(TRANSACTION_API, userToken)
+        const response = await clientGet(TRANSACTION_JSON)
         return response.data
     }
 )
@@ -41,7 +41,7 @@ const transactionSlice  = createSlice ({
             })
             .addCase(fetchTransactions.fulfilled, (state, action) => {
                 state.status = 'succeeded'
-                state.transactions = action.payload.body
+                state.transactions = action.payload
             })
             .addCase(fetchTransactions.rejected, (state, action) => {
                 state.status = 'failed'

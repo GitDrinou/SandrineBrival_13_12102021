@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-import { clientPutAuthentication, clientGetAuthentication } from "../api/client"
-import { USER_API, ACCOUNT_API } from "../utils/constants"
+import { clientPutAuthentication, clientGet } from "../api/client"
+import { USER_API, ACCOUNT_JSON } from "../utils/constants"
 
 // initial state for accounts
 const initialState = {
@@ -20,7 +20,8 @@ const initialState = {
 export const fetchAccounts = createAsyncThunk(
     'account/fetchAccounts',
     async(userToken) => {
-        const response = await clientGetAuthentication(ACCOUNT_API, userToken)
+        const response = await clientGet(ACCOUNT_JSON)
+        console.log(response.data)
         return response.data
     }
 )
@@ -66,7 +67,7 @@ const accountSlice  = createSlice ({
             })
             .addCase(fetchAccounts.fulfilled, (state, action) => {
                 state.status = 'succeeded'
-                state.accounts = state.accounts.concat(action.payload.body)
+                state.accounts = state.accounts.concat(action.payload)
             })
             .addCase(fetchAccounts.rejected, (state, action) => {
                 state.status = 'failed'

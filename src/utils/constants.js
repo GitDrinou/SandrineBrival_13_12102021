@@ -12,12 +12,16 @@ export const TITLE_PAGE_TRANSACTION = 'Argent Bank - Transactions'
 export const LOGIN_ACT = 'user/login'
 export const LOGIN_API = 'http://localhost:3001/api/v1/user/login'
 export const USER_API = 'http://localhost:3001/api/v1/user/profile'
-export const ACCOUNT_API = 'http://localhost:3001/api/v1/user/account'
-export const TRANSACTION_API = 'http://localhost:3001/api/v1/user/transaction'
+export const ACCOUNT_JSON = '../database/fakeAccountsUsers.json'
+export const TRANSACTION_JSON = '../database/fakeTransactions.json'
 
 export const secureKey = "tokenArgentBank"
 export const accountsSession = "accounts"
 export const userLogs = "logsAB"
+export const userId = "idUserAB"
+
+export const userEmail01 = "tony@stark.com"
+export const userEmail02 = "steve@rogers.com"
 
 const currentDate = new Date()
 export const currentMonth = currentDate.getMonth()+1
