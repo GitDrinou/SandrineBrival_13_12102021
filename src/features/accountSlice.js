@@ -19,9 +19,8 @@ const initialState = {
 */
 export const fetchAccounts = createAsyncThunk(
     'account/fetchAccounts',
-    async(userToken) => {
-        const response = await clientGet(ACCOUNT_JSON)
-        console.log(response.data)
+    async(userData) => {
+        const response = await clientGet(ACCOUNT_JSON, userData)
         return response.data
     }
 )

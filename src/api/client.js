@@ -36,7 +36,7 @@ export async function clientPost(endpoint, body) {
  * @param {string} endpoint URL + API Endpoint
  * @returns an object with status, data, headers and url
  */
- export async function clientGet(endpoint) {
+ export async function clientGet(endpoint, queryData) {
     
     let data
 
@@ -45,7 +45,8 @@ export async function clientPost(endpoint, body) {
             method: 'GET',
             headers: {
                 'Content-type': 'application/json'
-            }
+            },
+            body: JSON.stringify(queryData)
         })
         data = await response.json()
         if (response.ok) {
